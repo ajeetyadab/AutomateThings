@@ -70,9 +70,8 @@ def load_third_page():
 def load_fourth_page():
     time.sleep(10)
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
-    for i in range(138,301):
-        if i in [145,146,147,148,149,150,151,152,153,154,155,156,160,161,162,163,168,170,171,182,187,196,202,209,215,220,
-                 221,228,234,239,244,250,256,271,276,283,286,287,288,289,290,291,292,293,294,299]:
+    for i in range(618,694):
+        if i in [618,619,620,621,624,630,639,645,650,657,664,665,670,676,680,682,690,]:
             fill_rikt_pravisti(i)
             continue
         fill_gehu_entry(i)
@@ -103,8 +102,8 @@ def fill_gehu_entry(i):
         Select(driver.find_element(By.ID, "agriTech")).select_by_value(SICAHAI_VIDHI)
         driver.find_element(By.ID, "sichitArea").clear()
         driver.find_element(By.ID, "sichitArea").send_keys(agri_area)
-        # driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
-        time.sleep(5)
+        driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
+        time.sleep(.5)
         driver.find_element(By.XPATH, XPATH_MAPPING["BACK_BUTTON_ON_SICHAI_PAGE"]).click()
     except TimeoutException as e:
         driver.find_element(By.XPATH, number_x_path_map["clear"]).click()
@@ -121,7 +120,7 @@ def fill_rikt_pravisti(i):
         time.sleep(0.5)
         Select(driver.find_element(By.ID, "fasal_name")).select_by_value(RIKT_FASAL_NAME_VALUE)
         driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
-        time.sleep(5)
+        time.sleep(.5)
         driver.find_element(By.XPATH, XPATH_MAPPING["BACK_BUTTON_ON_SICHAI_PAGE"]).click()
     except TimeoutException as e:
         driver.find_element(By.XPATH, number_x_path_map["clear"]).click()

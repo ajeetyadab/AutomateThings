@@ -9,10 +9,10 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "Tkhan#5445"
+PASSWORD = "Tasn@123#"
 DISTRICT_VALUE = "136"
 TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723015"
+HALKA_VALUE = "0113600723010"
 FASAL_NAME_VALUE = "3"
 SICAHAI_VIDHI = "6"
 
@@ -68,7 +68,7 @@ def load_fourth_page():
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(323, 633):
+    for i in range(500,1600):
         #Add custom range here for alternate entry
         # if i in [11,15,]:
         #     alternate_entry(i)
@@ -88,9 +88,9 @@ def search_number(number):
 
 def fill_final_page():
     Select(driver.find_element(By.ID, "fasal_name")).select_by_value("56")
-    time.sleep(1)
+    time.sleep(.5)
     driver.find_element(By.XPATH, "//*[@id=\"tab-3\"]/form/p/table[3]/tbody/tr/td[1]/input[5]").click()
-    time.sleep(1)
+    time.sleep(.5)
     driver.find_element(By.XPATH, "//*[@id=\"content\"]/center/header/div/div[7]/div").click()
 
 
