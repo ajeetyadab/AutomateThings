@@ -68,7 +68,7 @@ def load_fourth_page():
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(500,1600):
+    for i in range(867,1514):
         #Add custom range here for alternate entry
         # if i in [11,15,]:
         #     alternate_entry(i)

@@ -68,10 +68,11 @@ def load_fourth_page():
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(40, 280):
+    for i in range(1,492):
         # Add custom range here for alternate entry
-        if i in [11,15,19,22,31,34,40,47,50,53,57,60,67,99,110,113,136,146,149,153,168,185,223,224,235,236,246,271]:
-            alternate_entry(i)
+        if i in [2,9,11,17,23,25,26,36,37,49,56,59,62,78,90,95,103,106,107,108,109,225,230,231,252,338,342,365,
+                 456,457,458,462]:
+            # alternate_entry(i)
             continue
         fill_khasra_pravisti(i)
 

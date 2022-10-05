@@ -70,11 +70,11 @@ def load_third_page():
 def load_fourth_page():
     time.sleep(10)
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
-    for i in range(618,694):
-        if i in [618,619,620,621,624,630,639,645,650,657,664,665,670,676,680,682,690,]:
-            fill_rikt_pravisti(i)
+    for i in range(667,695):
+        # if i in [618,619,620,621,624,630,639,645,650,657,664,665,670,676,680,682,690,]:
+        #     fill_rikt_pravisti(i)
             continue
-        fill_gehu_entry(i)
+    fill_gehu_entry(i)
 
 
 

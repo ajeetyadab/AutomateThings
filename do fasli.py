@@ -9,10 +9,10 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "@jIt4hero"
+PASSWORD = "Tkhan#5445"
 DISTRICT_VALUE = "136"
 TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723036"
+HALKA_VALUE = "0113600723015"
 FASAL_NAME_VALUE = "3"
 SICAHAI_VIDHI = "6"
 
@@ -68,11 +68,11 @@ def load_fourth_page():
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(1, 5):
+    for i in range(701,1100):
         # Add custom range here for alternate entry
-        # if i in [11,15,19,22,31,34,40,47,50,53,57,60,67,99,110,113,136,146,149,153,168,185,223,224,235,236,246,271]:
-        #     alternate_entry(i)
-        #     continue
+        if i in [708,711,714,724,737,746,748,749,753,754,758,760,761,762,763,764,777,783,786,792,795,796,797,798,799,803,805,806,807,813,822,823,824,834,835,834,839,840,841,842,843,844,845,853,854,855,856,858,859,860,861,862,863,864,865,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,890,899,905,908,913,921,936,937,939,941,944,952,954,956,957,958,962,965,968,969,970,971,981,982,985,986,987,988,989,990,997,998,999]:
+            # alternate_entry(i)
+            continue
         fill_khasra_pravisti(i)
 
 

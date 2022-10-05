@@ -72,7 +72,7 @@ def load_fourth_page():
     # click manually on pravisti
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
     for i in range(1, 10):
-        if i in [1, 2]:
+        if i in []:
             fill_rikt_pravisti(i)
             continue
         fill_dhan_entry(i)
@@ -130,4 +130,4 @@ def fill_dhan_entry(i):
 load_first_page()
 load_second_page()
 load_third_page()
-load_fourth_page()
+# load_fourth_page()
