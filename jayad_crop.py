@@ -9,12 +9,12 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "@jIt4hero"
+PASSWORD = "Raman7512@"
 DISTRICT_VALUE = "136"
-TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723036"
+TEHSHIL_VALUE = "00727"
+HALKA_VALUE = "0113600727037"
 FASAL_NAME_VALUE = "3"
-SICAHAI_VIDHI = "6"
+SICAHAI_VIDHI = "13"
 
 number_x_path_map = {
     "1": "//*[@id=\"searchGata\"]/div/div[3]/table/tbody/tr[1]/td[1]/a/div",
@@ -61,19 +61,19 @@ def load_third_page():
 
 
 def load_fourth_page():
-    time.sleep(10)
+    time.sleep(7)
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
     fill_form()
 
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(1,492):
-        # Add custom range here for alternate entry
-        if i in [2,9,11,17,23,25,26,36,37,49,56,59,62,78,90,95,103,106,107,108,109,225,230,231,252,338,342,365,
-                 456,457,458,462]:
-            # alternate_entry(i)
-            continue
+    for i in range(1,339):
+        # # Add custom range here for alternate entry
+        # if i in [2,9,11,17,23,25,26,36,37,49,56,59,62,78,90,95,103,106,107,108,109,225,230,231,252,338,342,365,
+        #          456,457,458,462]:
+        #     # alternate_entry(i)
+        #     continue
         fill_khasra_pravisti(i)
 
 

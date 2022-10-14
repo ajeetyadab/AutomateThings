@@ -9,13 +9,13 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "@jIt4hero"
+PASSWORD = "Raman7512@"
 DISTRICT_VALUE = "136"
-TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723036"
+TEHSHIL_VALUE = "00727"
+HALKA_VALUE = "0113600727037"
 RIKT_FASAL_NAME_VALUE = "67"
 DHAN_FASAL_NAME_VALUE = "5"
-SICAHAI_VIDHI = "6"
+SICAHAI_VIDHI = "13"
 
 
 number_x_path_map = {
@@ -71,8 +71,8 @@ def load_fourth_page():
     time.sleep(10)
     # click manually on pravisti
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
-    for i in range(1, 10):
-        if i in []:
+    for i in range(123,339):
+        if i in range(123,339):
             fill_rikt_pravisti(i)
             continue
         fill_dhan_entry(i)
@@ -97,7 +97,7 @@ def fill_rikt_pravisti(i):
         driver.find_element(By.XPATH, "//*[@id=\"case_frm\"]/button[2]").click()
         time.sleep(0.5)
         Select(driver.find_element(By.ID, "fasal_name")).select_by_value(RIKT_FASAL_NAME_VALUE)
-        # driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
+        driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
         time.sleep(5)
         driver.find_element(By.XPATH, XPATH_MAPPING["BACK_BUTTON_ON_SICHAI_PAGE"]).click()
     except TimeoutException as e:
@@ -130,4 +130,4 @@ def fill_dhan_entry(i):
 load_first_page()
 load_second_page()
 load_third_page()
-# load_fourth_page()
+load_fourth_page()

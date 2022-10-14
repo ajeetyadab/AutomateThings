@@ -9,13 +9,13 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "@jIt4hero"
+PASSWORD = "Raman7512@"
 DISTRICT_VALUE = "136"
-TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723036"
+TEHSHIL_VALUE = "00727"
+HALKA_VALUE = "0113600727037"
 RIKT_FASAL_NAME_VALUE = "61"
 GEHU_FASAL_NAME_VALUE = "2"
-SICAHAI_VIDHI = "6"
+SICAHAI_VIDHI = "13"
 
 
 number_x_path_map = {
@@ -70,11 +70,11 @@ def load_third_page():
 def load_fourth_page():
     time.sleep(10)
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
-    for i in range(667,695):
-        # if i in [618,619,620,621,624,630,639,645,650,657,664,665,670,676,680,682,690,]:
+    for i in range(1,339):
+        # if i in []:
         #     fill_rikt_pravisti(i)
-            continue
-    fill_gehu_entry(i)
+        #     continue
+        fill_gehu_entry(i)
 
 
 

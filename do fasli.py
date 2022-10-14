@@ -9,10 +9,10 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "Tkhan#5445"
+PASSWORD = "Kumar409#"
 DISTRICT_VALUE = "136"
-TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723015"
+TEHSHIL_VALUE = "00727"
+HALKA_VALUE = "0113600727059"
 FASAL_NAME_VALUE = "3"
 SICAHAI_VIDHI = "6"
 
@@ -68,9 +68,9 @@ def load_fourth_page():
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(701,1100):
+    for i in range(1,254):
         # Add custom range here for alternate entry
-        if i in [708,711,714,724,737,746,748,749,753,754,758,760,761,762,763,764,777,783,786,792,795,796,797,798,799,803,805,806,807,813,822,823,824,834,835,834,839,840,841,842,843,844,845,853,854,855,856,858,859,860,861,862,863,864,865,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,890,899,905,908,913,921,936,937,939,941,944,952,954,956,957,958,962,965,968,969,970,971,981,982,985,986,987,988,989,990,997,998,999]:
+        if i in [2,7,27,28,29,42,43,44,53,54,55,99,113.114,187,188,190,191,192,195,196,197,198,199,203,204,205,206,207,213,214,216] or i in range(116,134) or i in range(144,151) or i in range(165,169) or i in range(226,235):
             # alternate_entry(i)
             continue
         fill_khasra_pravisti(i)
