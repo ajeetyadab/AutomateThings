@@ -9,10 +9,10 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "Raman7512@"
+PASSWORD = "Deva@1622"
 DISTRICT_VALUE = "136"
-TEHSHIL_VALUE = "00727"
-HALKA_VALUE = "0113600727037"
+TEHSHIL_VALUE = "00723"
+HALKA_VALUE = "0113600723016"
 FASAL_NAME_VALUE = "3"
 SICAHAI_VIDHI = "13"
 
@@ -68,13 +68,14 @@ def load_fourth_page():
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(1,339):
+    for i in range(1,190):
         # # Add custom range here for alternate entry
         # if i in [2,9,11,17,23,25,26,36,37,49,56,59,62,78,90,95,103,106,107,108,109,225,230,231,252,338,342,365,
         #          456,457,458,462]:
         #     # alternate_entry(i)
         #     continue
         fill_khasra_pravisti(i)
+        print(i)
 
 
 def click_digits(digits):
