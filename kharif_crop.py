@@ -15,7 +15,8 @@ TEHSHIL_VALUE = "00723"
 HALKA_VALUE = "0113600723016"
 RIKT_FASAL_NAME_VALUE = "67"
 DHAN_FASAL_NAME_VALUE = "5"
-SICAHAI_VIDHI = "13"
+SICAHAI_VIDHI = ""
+
 
 
 number_x_path_map = {
@@ -68,11 +69,11 @@ def load_third_page():
 
 
 def load_fourth_page():
-    time.sleep(10)
+    time.sleep(3)
     # click manually on pravisti
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
-    for i in range(1,350):
-        if i in [1,5,14,15,18,21,24,26,30,37,42,43,49,58,59,60,61,62,63,70,86,96,100,101,106,110,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,137,139,140,141,148,149,150,154,156,166,168,171,172,174,181]:
+    for i in range(1,25):
+        if i in []:
             fill_rikt_pravisti(i)
             print(i)
             continue
@@ -118,10 +119,19 @@ def fill_dhan_entry(i):
         Select(driver.find_element(By.ID, "fasal_name")).select_by_value(DHAN_FASAL_NAME_VALUE)
         time.sleep(1)
         agri_area = driver.find_element(By.ID, "agriArea").get_attribute('value')
+        print(agri_area)
+        if float(agri_area)>=1.0:
+            SICAHAI_VIDHI="6"
+
+        else:
+            SICAHAI_VIDHI="13"
+
+
+
         Select(driver.find_element(By.ID, "agriTech")).select_by_value(SICAHAI_VIDHI)
         driver.find_element(By.ID, "sichitArea").clear()
         driver.find_element(By.ID, "sichitArea").send_keys(agri_area)
-        driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
+        #driver.find_element(By.XPATH, XPATH_MAPPING["SURAKSHIT_KAREIN_BUTTON"]).click()
         time.sleep(1)
         driver.find_element(By.XPATH, XPATH_MAPPING["BACK_BUTTON_ON_SICHAI_PAGE"]).click()
     except TimeoutException as e:
