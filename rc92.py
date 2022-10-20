@@ -10,12 +10,24 @@ avedak_ka_naam="rahul"
 pita_pati_ka_naam="hero"
 mobile_number="7065509579"
 avedak_ka_pata="hardaspur kothra"
+
 #भाग - 2 मृतक / मृतका / विवाहिता / पुनर्विवाहिता खातेदार का विवरण जिसकी मृत्यु के उपरान्त उत्तराधिकार का दावा किया जाना है
 
 khatedaar_ka_naam="raghu"
-male_female="1" # पुरुष खातेदार के लिए 1 और महिला खातेदार के लिए 2 चुने
+
+male_female="1"             # पुरुष खातेदार के लिए 1 और महिला खातेदार के लिए 2 चुने
+
 mrityu_tithi="10/01/2022"
-pita_pati_sanrakshak="1"    #िता =1,पति =2,संरक्षक=3
+
+pita_pati_sanrakshak="1"    #पिता  =1,पति =2,संरक्षक=3
+
+khatedaar_ke_pita_pati_ka_naam="zero"
+
+mode_aquired="उत्तराधिकार से"         #उत्तराधिकार से,स्वंय अर्जित की हुई
+
+gram_ka_naam="116377" #lgd villge code
+
+
 
 
 
@@ -106,8 +118,25 @@ def avedan_third_page():
     time.sleep(1)
     select_pita_pati=Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_f__type\"]"))
     select_pita_pati.select_by_value(pita_pati_sanrakshak)
-
-
+    time.sleep(1)
+    driver.find_element(By.XPATH,"//*[@id=\"txt_Applicant_f_Name_U\"]").send_keys(khatedaar_ke_pita_pati_ka_naam)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"ddl_khatedaar_Tithi\"]")).select_by_value(mode_aquired)
+    time.sleep(1)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"ddl_court_mandal_U\"]")).select_by_value("13")#mandal
+    time.sleep(1)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"Dropdown_New_Dist_U\"]")).select_by_value("136")  # janpad
+    time.sleep(1)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"DropDownList_New_Tehsil_U\"]")).select_by_value("00723")  # tehsil
+    time.sleep(1)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"txt_dispute_div\"]")).select_by_value("00063")  # paragna
+    time.sleep(1)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"dropdown_village\"]")).select_by_value(gram_ka_naam)  # gram
+    time.sleep(1)
+    driver.find_element(By.XPATH, "//*[@id=\"txt_Applicant_Address_U\"]").send_keys(avedak_ka_pata)
+    time.sleep(1)
+    driver.find_element(By.XPATH, "//*[@id=\"txt_JiskaVivaran_MobileNo\"]").send_keys(mobile_number)
+    time.sleep(1)
+    driver.find_element(By.XPATH,"//*[@id=\"btn_bhaag2_save\"]").click()
 
 
 
