@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 import time
 
+lgdcodes_villages=dict(hrd='116377',hrng='116374',prt='116373',pgm='116370',mdy='116368')
 avedak_ka_naam="प्रताप"
 pita_pati_ka_naam="भीसम सिंह"
 mobile_number="7065509579"
@@ -16,27 +17,31 @@ avedak_ka_pata="निवासी ग्राम पृथ्वी नगर"
 
 khatedaar_ka_naam="भीसम सिंह"
 male_female="1"             # पुरुष खातेदार के लिए 1 और महिला खातेदार के लिए 2 चुने
-mrityu_tithi="10/01/2022"
+mrityu_tithi="10/08/2022"
 pita_pati_sanrakshak="1"    #पिता  =1,पति =2,संरक्षक=3
-khatedaar_ke_pita_pati_ka_naam="zero"
+khatedaar_ke_pita_pati_ka_naam="तीरथ सिंह"
 mode_aquired="उत्तराधिकार से"         #उत्तराधिकार से,स्वंय अर्जित की हुई
-gram_ka_naam="116377" #lgd villge code
+gram_ka_naam=lgdcodes_villages["prt"] #lgd villge code
+
 
 #भाग - 3 खातेदार  के स्वामित्व की भूमि का विवरण
-village_lgd="116377"
-no_of_gata="3"
-gata_range=range(0,3)
-disputed_gata=["55","61","67"]# टोटल गाटाओ की संख्या
+
+disputed_gata=["125","126","123"]# टोटल गाटाओ की संख्या
+disputed_lgd=lgdcodes_villages["prt"]
+no_of_gata=str(len(disputed_gata))
+gata_range=range(int(no_of_gata))
+
 
 
 #वारिसों का विवरण
 
-no_varis="3"
-varis_name=["raj","praja","goel"]
+
+varis_name=["प्रताप","परमाल","गौरव","उर्मिला"]
+no_varis=str(len(varis_name))
 varis_range=range(len(varis_name))
-varis_age=["25","26","28"]
+varis_age=["38","33","28","50"]
 prakriti=["पिता","पति","संरक्षक"]                          # पिता / पति / संरक्षक की प्रकृति का नाम
-varis_pita_pati_name="ddd"                              #पिता / पति / संरक्षक का नाम
+varis_pita_pati_name="भीसम सिंह"                         #पिता / पति / संरक्षक का नाम
 sambandh=["पुत्र-पृत्रादि क्रम में पुंजातीय वंशज","विधवा","अविवाहिता पुत्री","विवाहिता पूत्री"]
 
 
@@ -61,8 +66,6 @@ def load_login_page():
     driver.find_element(By.XPATH, "//*[@id=\"ctl00_ContentPlaceHolder_revcourt_txt_password\"]").send_keys("@jIt4hero")
     time.sleep(2)
     txt=driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_captcha_lbl\"]").get_attribute("value")
-    print(txt)
-
     driver.find_element(By.XPATH, "//*[@id=\"ctl00_ContentPlaceHolder_revcourt_txt_captcha\"]").send_keys(txt)
     time.sleep(3)
     driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_btn_submit\"]").click()
@@ -85,6 +88,7 @@ def avedan_second_page():
     time.sleep(1)
     select_mandal=Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_court_mandal_A\"]"))
     select_mandal.select_by_value("13")
+    time.sleep(2)
     select_janpad = Select(driver.find_element(By.XPATH, "//*[@id=\"Dropdown_New_Dist_A\"]"))
     select_janpad.select_by_value("136")
     time.sleep(1)
@@ -108,7 +112,7 @@ def avedan_third_page():
     select_reason_of_virasat.select_by_value("खातेदार की मृत्यु")
     time.sleep(1)
 
-    driver.find_element(By.XPATH,"//*[@id=\"txt_Applicant_Name_U\"]").send_keys(avedak_ka_naam)
+    driver.find_element(By.XPATH,"//*[@id=\"txt_Applicant_Name_U\"]").send_keys(khatedaar_ka_naam)
     time.sleep(1)
 
     driver.find_element(By.XPATH, "//*[@id=\"rbtn_cause_of_death\"]/tbody/tr/td[2]/label").click()
@@ -143,18 +147,33 @@ def avedan_third_page():
     driver.find_element(By.XPATH,"//*[@id=\"btn_bhaag2_save\"]").click()
 
 def avedan_fourth_page():
-    time.sleep(60)
-    # Select(driver.find_element(By.XPATH,"//*[@id=\"txt_dispute_div_bhaag3\"]")).select_by_value("00063")
-    # time.sleep(2)
-    # Select(driver.find_element(By.XPATH,"//*[@id=\"dropdown_village_bhaag3\"]")).select_by_value("116377")
-    # time.sleep(5)
-    # Select(driver.find_element(By.XPATH, "//*[@id=\"ddl_total_disputed_land\"]")).select_by_value(no_of_gata)
-    # time.sleep(3)
-    # for i in gata_range:
-    #     driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(disputed_gata[i])
-    #     time.sleep(3)
-    #     driver.find_element(By.XPATH,"//*[@id=\"ddl_gata_sankhya\"]").click()
-    #     Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_gata_sankhya\"]")).first_selected_option()
+    time.sleep(10)
+    Select(driver.find_element(By.XPATH,"//*[@id=\"txt_dispute_div_bhaag3\"]")).select_by_value("00063")
+    time.sleep(2)
+    Select(driver.find_element(By.XPATH,"//*[@id=\"dropdown_village_bhaag3\"]")).select_by_value(disputed_lgd)
+    time.sleep(2)
+    Select(driver.find_element(By.XPATH, "//*[@id=\"ddl_total_disputed_land\"]")).select_by_value(no_of_gata)
+    time.sleep(3)
+    for i in gata_range:
+        driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(disputed_gata[i])
+        time.sleep(3)
+        # driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(int(disputed_gata[i]))
+        driver.find_element(By.XPATH,"/html/body/form/div[4]/div/table/tbody/tr/td/table/tbody/tr[2]/td/fieldset/table/tbody/tr[2]/td/table/tbody/tr[4]/td[1]").click()
+        select = Select(driver.find_element(By.ID, "ddl_gata_sankhya"))
+        options = select.options
+        print(options)
+        for index in range(0, len(options) - 1):
+            el = select.select_by_index(index)
+            el.click()
+            print(el)
+            break
+        break
+
+        # time.sleep(3)
+        # Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_gata_sankhya\"]")).select_by_index(1)
+        # time.sleep(2)
+
+
 
 
 
@@ -174,8 +193,9 @@ def avedan_fifth_page():
         Select(driver.find_element(By.XPATH, "//*[@id=\"ddl_Bhaag4_Age\"]")).select_by_value(varis_age[i])
         Select(driver.find_element(By.XPATH, "//*[@id=\"txt_Bhaag4_KhaatedarSeSambandh\"]")).select_by_value(sambandh[0])
 
-        driver.find_element(By.XPATH,"//*[@id=\"txt_waris_address\"]").send_keys(avedak_ka_pata)
-        time.sleep(3)
+        driver.find_element(By.XPATH,"//*[@id=\"txt_waris_address\"]").clear()
+        time.sleep(1)
+        driver.find_element(By.XPATH, "//*[@id=\"txt_waris_address\"]").send_keys(avedak_ka_pata)
         driver.find_element(By.XPATH,"//*[@id=\"btn_AddVaarisKaVivaran\"]").click()
         time.sleep(3)
 
@@ -198,4 +218,4 @@ load_avedan_page()
 avedan_second_page()
 avedan_third_page()
 avedan_fourth_page()
-avedan_fifth_page()
+# avedan_fifth_page()
