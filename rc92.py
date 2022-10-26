@@ -49,26 +49,33 @@ sambandh=["पुत्र-पृत्रादि क्रम में प�
 driver = webdriver.Firefox(executable_path=r"C:/Users/acer/PycharmProjects/AutomateThings/geckodriver.exe")
 
 def load_login_page():
-    driver.get("http://vaad.up.nic.in/Lekhpal_Login.aspx")
-    time.sleep(5)
-    select_mandal=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_ddl_court_mandal_U\"]"))
-    select_mandal.select_by_value("13")
-    time.sleep(2)
-    select_janpad=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_Dropdown_New_Dist_U\"]"))
-    select_janpad.select_by_value("136")
-    time.sleep(2)
-    select_tehsil=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_DropDownList_New_Tehsil_U\"]"))
-    select_tehsil.select_by_value("00723")
-    time.sleep(2)
-    select_halka=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_User_type\"]"))
-    select_halka.select_by_value("0113600723036")
-    time.sleep(2)
-    driver.find_element(By.XPATH, "//*[@id=\"ctl00_ContentPlaceHolder_revcourt_txt_password\"]").send_keys("@jIt4hero")
-    time.sleep(2)
-    txt=driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_captcha_lbl\"]").get_attribute("value")
-    driver.find_element(By.XPATH, "//*[@id=\"ctl00_ContentPlaceHolder_revcourt_txt_captcha\"]").send_keys(txt)
-    time.sleep(3)
-    driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_btn_submit\"]").click()
+    is_logged_out = True
+    while is_logged_out:
+        driver.get("http://vaad.up.nic.in/Lekhpal_Login.aspx")
+        time.sleep(5)
+        select_mandal=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_ddl_court_mandal_U\"]"))
+        select_mandal.select_by_value("13")
+        time.sleep(2)
+        select_janpad=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_Dropdown_New_Dist_U\"]"))
+        select_janpad.select_by_value("136")
+        time.sleep(2)
+        select_tehsil=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_DropDownList_New_Tehsil_U\"]"))
+        select_tehsil.select_by_value("00723")
+        time.sleep(2)
+        select_halka=Select(driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_User_type\"]"))
+        select_halka.select_by_value("0113600723036")
+        time.sleep(2)
+        driver.find_element(By.XPATH, "//*[@id=\"ctl00_ContentPlaceHolder_revcourt_txt_password\"]").send_keys("@jIt4hero")
+        time.sleep(2)
+        txt=driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_captcha_lbl\"]").get_attribute("value")
+        driver.find_element(By.XPATH, "//*[@id=\"ctl00_ContentPlaceHolder_revcourt_txt_captcha\"]").send_keys(txt)
+        time.sleep(3)
+        driver.find_element(By.XPATH,"//*[@id=\"ctl00_ContentPlaceHolder_revcourt_btn_submit\"]").click()
+        try:
+            WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((By.ID, "ctl00_ContentPlaceHolder_revcourt_lbl_msg")))
+        except TimeoutException as e:
+            is_logged_out = False
+
 
 
 
@@ -155,21 +162,15 @@ def avedan_fourth_page():
     Select(driver.find_element(By.XPATH, "//*[@id=\"ddl_total_disputed_land\"]")).select_by_value(no_of_gata)
     time.sleep(3)
     for i in gata_range:
+        driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").clear()
         driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(disputed_gata[i])
         time.sleep(3)
         # driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(int(disputed_gata[i]))
         driver.find_element(By.XPATH,"/html/body/form/div[4]/div/table/tbody/tr/td/table/tbody/tr[2]/td/fieldset/table/tbody/tr[2]/td/table/tbody/tr[4]/td[1]").click()
         select = Select(driver.find_element(By.ID, "ddl_gata_sankhya"))
-        options = select.options
-        print(options)
-        for index in range(0, len(options) - 1):
-            el = select.select_by_index(index)
-            el.click()
-            print(el)
-            break
-        break
+        select.select_by_index(1)
 
-        # time.sleep(3)
+        time.sleep(50)
         # Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_gata_sankhya\"]")).select_by_index(1)
         # time.sleep(2)
 
