@@ -170,11 +170,11 @@ def avedan_fourth_page():
         select = Select(driver.find_element(By.ID, "ddl_gata_sankhya"))
         select.select_by_index(1)
 
-        time.sleep(50)
+        time.sleep(1)
         # Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_gata_sankhya\"]")).select_by_index(1)
         # time.sleep(2)
 
-
+    driver.find_element(By.XPATH,"//*[@id=\"btn_bhaag3_save\"]").clic()
 
 
 
@@ -219,4 +219,4 @@ load_avedan_page()
 avedan_second_page()
 avedan_third_page()
 avedan_fourth_page()
-# avedan_fifth_page()
+avedan_fifth_page()
