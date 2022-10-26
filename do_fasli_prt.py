@@ -6,15 +6,25 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 import time
 
+
+#------------------------------------
+total_gata=range(54,60)
+do_fasali_gata=[54,55,56]
+teen_fasali_gata=[]
+
+
+#----------------------------------
+
+
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
 PASSWORD = "@jIt4hero"
 DISTRICT_VALUE = "136"
 TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723016"
+HALKA_VALUE = "0113600723036"
 FASAL_NAME_VALUE = "3"
-SICAHAI_VIDHI = "13"
+SICAHAI_VIDHI = "6"
 
 number_x_path_map = {
     "1": "//*[@id=\"searchGata\"]/div/div[3]/table/tbody/tr[1]/td[1]/a/div",
@@ -61,21 +71,28 @@ def load_third_page():
 
 
 def load_fourth_page():
-    time.sleep(7)
+    time.sleep(10)
     # driver.find_element(By.XPATH, "//*[@id=\"link2\"]/a/div/div[2]").click()
     fill_form()
 
 
 def fill_form():
     time.sleep(0.5)
-    for i in range(1,190):
-        # # Add custom range here for alternate entry
-        # if i in [2,9,11,17,23,25,26,36,37,49,56,59,62,78,90,95,103,106,107,108,109,225,230,231,252,338,342,365,
-        #          456,457,458,462]:
-        #     # alternate_entry(i)
-        #     continue
-        fill_khasra_pravisti(i)
-        print(i)
+    for i in total_gata:
+        # Add custom range here for alternate entry
+
+        if i in do_fasali_gata:
+            fill_dofasli_pravisti(i)
+            print(i,"do fasali")
+            continue
+
+        elif i in teen_fasali_gata:
+            fill_teenfasli_pravisti(i)
+            print(i,"teenfasali")
+
+        else:
+            print(i)
+            continue
 
 
 def click_digits(digits):
@@ -86,6 +103,7 @@ def click_digits(digits):
 def search_number(number):
     click_digits(str(number))
     driver.find_element(By.XPATH, "//*[@id=\"sgw\"]/button/i").click()
+    return get_min_gata_list()
 
 
 def fill_final_page():
@@ -118,20 +136,73 @@ def alternate_entry(i):
         time.sleep(3)
 
 
-def fill_khasra_pravisti(i):
+def fill_dofasli_pravisti(i):
+    search_gata_list = search_number(i)
+    if len(search_gata_list) == 0:
+        driver.find_element(By.XPATH, number_x_path_map["clear"]).click()
+        time.sleep(3)
+        return
+    for gata_index in range(0, len(search_gata_list)):
+        if gata_index != 0:
+            driver.find_element(By.XPATH, number_x_path_map["clear"]).click()
+            current_gata_list = search_number(i)
+        else:
+            current_gata_list = search_gata_list
+
+        gata_element = current_gata_list[gata_index]
+        time.sleep(0.5)
+        try:
+            # WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((By.NAME, "khata_number")))
+            # driver.find_element(By.NAME, "khata_number").click()
+            # gata_element.click()
+            gata_element.find_element(By.NAME, "khata_number").click()
+            driver.find_element(By.XPATH, "//*[@id=\"case_frm\"]/button[7]").click()
+            time.sleep(1)
+            gata_area_text = driver.find_element(By.XPATH, "//*[@id=\"tabs-container\"]/div[1]/label[3]").text
+            gata_area = float(gata_area_text.split(":")[1].strip())
+            driver.find_element(By.ID, "doFasliSichitArea").clear()
+            driver.find_element(By.ID, "doFasliSichitArea").send_keys(gata_area)
+            #driver.find_element(By.XPATH,"//*[@id=\"tab-4\"]/form/p/table[2]/tbody/tr/td[1]/input[1]").click()
+            time.sleep(3)
+            driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
+
+
+        except Exception as e:
+            # driver.find_element(By.XPATH, number_x_path_map["clear"]).click()
+            time.sleep(1)
+
+def fill_teenfasli_pravisti(i):
     search_number(i)
     time.sleep(0.5)
     try:
         WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((By.NAME, "khata_number")))
         driver.find_element(By.NAME, "khata_number").click()
-        driver.find_element(By.XPATH, "//*[@id=\"case_frm\"]/button[2]").click()
-        fill_final_page()
+        driver.find_element(By.XPATH, "//*[@id=\"case_frm\"]/button[7]").click()
+        time.sleep(1)
+        gata_area_text = driver.find_element(By.XPATH, "//*[@id=\"tabs-container\"]/div[1]/label[3]").text
+        gata_area = 2*float(gata_area_text.split(":")[1].strip())
+        driver.find_element(By.ID, "doFasliSichitArea").clear()
+        driver.find_element(By.ID, "doFasliSichitArea").send_keys(gata_area)
+        driver.find_element(By.XPATH,"//*[@id=\"tab-4\"]/form/p/table[2]/tbody/tr/td[1]/input[1]").click()
+        time.sleep(3)
+        driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
+
+
     except TimeoutException as e:
         driver.find_element(By.XPATH, number_x_path_map["clear"]).click()
         time.sleep(3)
 
+def get_min_gata_list():
+    try:
+        WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((By.NAME, "khata_number")))
+        search_gata = driver.find_element(By.CLASS_NAME, "search-data-list")
+        search_gata_list = search_gata.find_elements(By.TAG_NAME, "li")
+    except TimeoutException as e:
+        search_gata_list = []
+    return search_gata_list
 
 load_first_page()
 load_second_page()
 load_third_page()
 load_fourth_page()
+

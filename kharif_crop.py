@@ -9,10 +9,10 @@ import time
 driver_path = "./chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-PASSWORD = "Deva@1622"
+PASSWORD = "@jIt4hero"
 DISTRICT_VALUE = "136"
 TEHSHIL_VALUE = "00723"
-HALKA_VALUE = "0113600723016"
+HALKA_VALUE = "0113600723036"
 RIKT_FASAL_NAME_VALUE = "67"
 DHAN_FASAL_NAME_VALUE = "5"
 SICAHAI_VIDHI = ""
