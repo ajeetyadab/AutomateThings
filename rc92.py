@@ -26,10 +26,11 @@ gram_ka_naam=lgdcodes_villages["prt"] #lgd villge code
 
 #भाग - 3 खातेदार  के स्वामित्व की भूमि का विवरण
 
-disputed_gata=["125","126","123"]# टोटल गाटाओ की संख्या
+disputed_gata=["125","126","123","128"]# टोटल गाटाओ की संख्या
 disputed_lgd=lgdcodes_villages["prt"]
-no_of_gata=str(len(disputed_gata))
-gata_range=range(int(no_of_gata))
+x=len(disputed_gata)-1
+no_of_gata=str(x)
+gata_range=range(0,len(disputed_gata))
 
 
 
@@ -165,16 +166,12 @@ def avedan_fourth_page():
         driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").clear()
         driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(disputed_gata[i])
         time.sleep(3)
-        # driver.find_element(By.XPATH,"//*[@id=\"txt_gata_type_val\"]").send_keys(int(disputed_gata[i]))
         driver.find_element(By.XPATH,"/html/body/form/div[4]/div/table/tbody/tr/td/table/tbody/tr[2]/td/fieldset/table/tbody/tr[2]/td/table/tbody/tr[4]/td[1]").click()
         select = Select(driver.find_element(By.ID, "ddl_gata_sankhya"))
         select.select_by_index(1)
-
         time.sleep(1)
-        # Select(driver.find_element(By.XPATH,"//*[@id=\"ddl_gata_sankhya\"]")).select_by_index(1)
-        # time.sleep(2)
 
-    driver.find_element(By.XPATH,"//*[@id=\"btn_bhaag3_save\"]").clic()
+    driver.find_element(By.XPATH,"//*[@id=\"btn_bhaag3_save\"]").click()
 
 
 
