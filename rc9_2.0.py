@@ -21,7 +21,7 @@ ser_ob = Service(r"C:/Users/acer/Desktop/python codes/geckodriver.exe")
 driver = webdriver.Firefox(service=ser_ob)
 wait = WebDriverWait(driver, 3)
 # dictionary
-file = "virasat_apps.xlsx"
+file = "C:/Users/acer/Desktop/python codes/virasat_apps.xlsx"
 virasat_dict = {
     1: [read_data(file, 'Sheet1', 23, 2), read_data(file, 'Sheet1', 23, 3), read_data(file, 'Sheet1', 23, 4),
         read_data(file, 'Sheet1', 23, 5), read_data(file, 'Sheet1', 23, 6)],

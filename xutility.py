@@ -31,7 +31,7 @@ def fill_green_color(file, sheetname, rownum, columnno):
     workbook = openpyxl.load_workbook(file)
     sheet = workbook[sheetname]
     greenfill = PatternFill(start_color='60b212', end_color='60b212', fill_type='solid')
-    sheet.cell(rrownum, columnno).fill = greenfill
+    sheet.cell(rownum, columnno).fill = greenfill
     workbook.save(file)
 
 
@@ -39,7 +39,7 @@ def fill_red_color(file, sheetname, rownum, columnno):
     workbook = openpyxl.load_workbook(file)
     sheet = workbook[sheetname]
     redfill = PatternFill(start_color='ff0000', end_color='ff0000', fill_type='solid')
-    sheet.cell(rrownum, columnno).fill = redfill
+    sheet.cell(rownum, columnno).fill = redfill
     workbook.save(file)
 
 
